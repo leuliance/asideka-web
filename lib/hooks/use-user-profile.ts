@@ -21,6 +21,7 @@ export function useUpdateProfile() {
       queryClient.invalidateQueries({ queryKey: ["user-profile"] });
     },
     onError: (error: Error) => {
+      console.log({ error })
       toast.error(error.message || "Failed to update profile");
     },
   });
