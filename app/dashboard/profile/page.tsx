@@ -14,23 +14,6 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const { mutate: updateProfile, isPending } = useUpdateProfile();
 
-  if (!session) {
-    return (
-      <div className="max-w-4xl mx-auto">
-        <Card>
-          <CardContent className="py-12 text-center">
-            <UserIcon className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-            <h3 className="font-semibold mb-2">Not logged in</h3>
-            <p className="text-muted-foreground">
-              Please log in to view your profile
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
-  // Use profile if available, otherwise fallback to session user data
   const displayData = profile || {
     firstname: user?.firstName || user?.name?.split(' ')[0] || '',
     lastname: user?.lastName || user?.name?.split(' ')[1] || '',
@@ -71,6 +54,22 @@ export default function ProfilePage() {
   const [newSkill, setNewSkill] = useState('');
   const [newLanguage, setNewLanguage] = useState('');
   const [newCertification, setNewCertification] = useState('');
+
+  if (!session) {
+    return (
+      <div className="max-w-4xl mx-auto">
+        <Card>
+          <CardContent className="py-12 text-center">
+            <UserIcon className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+            <h3 className="font-semibold mb-2">Not logged in</h3>
+            <p className="text-muted-foreground">
+              Please log in to view your profile
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
